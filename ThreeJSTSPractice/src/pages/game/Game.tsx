@@ -11,14 +11,13 @@ export const Game = () =>{
 
 
     return(
-        <>
-         <Link to='/'><button>Home</button></Link>
+        <div className='game-container'>
         <Canvas >
            <mesh>
                 <boxGeometry args={[1,1,1]}/>
            </mesh>
         </Canvas>
-        </>
+        </div>
        
     )
 }

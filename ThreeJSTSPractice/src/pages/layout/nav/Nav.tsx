@@ -13,6 +13,9 @@ export const Nav = () =>{
                 <li>
                     <Link to='/game'>Game</Link>
                 </li>
+                <li>
+                    <Link to='/solar'>Solar</Link>
+                </li>
             </ul>
         
         </nav>

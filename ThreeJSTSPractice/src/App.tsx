@@ -1,8 +1,13 @@
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './App.scss'
-import {Layout} from './pages/layout/Layout'
+
 import { Game } from './pages/game/Game'
+import { Solar } from './pages/solar/Solar'
+import { Header } from './pages/layout/header/Header'
+import { Footer } from './pages/layout/footer/Footer'
+import { Home } from './pages/home/Home'
+
 
 
 
@@ -11,14 +16,16 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Layout/>}/>
-        {/* <Route index element={<Home/>}/> */}
-        <Route path="game" element={<Game/>}/>
+    <Header/>
+      <div className='page-container'>
+        <Routes>
+        <Route path='/' index element={<Home/>}/>
+        <Route path="/game" element={<Game/>}/>
         {/* <Route path=* element={<Error/>}/> */}
-
+        <Route path='/solar' element={<Solar/>}/>
       </Routes>
-    
+      </div>
+      <Footer/>
     </BrowserRouter>
   )
 }

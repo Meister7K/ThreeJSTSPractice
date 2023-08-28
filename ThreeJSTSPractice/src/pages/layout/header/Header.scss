@@ -1,0 +1,12 @@
+.head-container{
+    box-sizing: border-box;
+    position: fixed;
+    top:0;
+    left:0;
+    display: flex;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background-color: transparent;
+    border: inset 5px rgba(0,0,0, .5);
+    z-index: 10;
+}
