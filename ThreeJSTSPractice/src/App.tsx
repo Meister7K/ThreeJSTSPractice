@@ -1,7 +1,7 @@
 
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import './App.scss'
-
+import {Perf} from 'r3f-perf'
 import { Game } from './pages/game/Game'
 import { Solar } from './pages/solar/Solar'
 import { Header } from './pages/layout/header/Header'
@@ -18,6 +18,7 @@ function App() {
     <BrowserRouter>
     <Header/>
       <div className='page-container'>
+        
         <Routes>
         <Route path='/' index element={<Home/>}/>
         <Route path="/game" element={<Game/>}/>

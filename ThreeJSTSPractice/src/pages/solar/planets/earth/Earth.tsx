@@ -4,12 +4,13 @@ import earthNormal from '../../../../assets/photos/textures/2k_earth_normal_map.
 import earthImg from '../../../../assets/photos/textures/2k_earth_daymap.jpg'
 import earthSpec from '../../../../assets/photos/textures/2k_earth_specular_map.jpg'
 import { useFrame } from '@react-three/fiber';
-
+import { Moon } from '../moon/Moon'
 
 
 export const Earth= ()=>{
 
     const earthRef  = useRef(null);
+    const earthGroup = useRef(null);
     const[hover, setHover] = useState(false);
     
 
@@ -28,13 +29,14 @@ export const Earth= ()=>{
     })
     
     return(
-        <>
-        <mesh ref={earthRef}
+        <group ref={earthGroup}>
+        <mesh receiveShadow castShadow ref={earthRef}
         onPointerOver={()=>setHover(true)}
         onPointerOut={()=>setHover(false)}>
             <sphereGeometry args={[1,36,36]} />
             <meshStandardMaterial map={earthTexture} normalMap={earthNormalMap} roughnessMap={earthSpecMap} />
         </mesh>
-        </>
+        <Moon/>
+        </group>
     )
 }
