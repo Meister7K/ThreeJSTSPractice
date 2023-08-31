@@ -5,7 +5,7 @@ import earthImg from '../../../../assets/photos/textures/2k_earth_daymap.jpg'
 import earthSpec from '../../../../assets/photos/textures/2k_earth_specular_map.jpg'
 import { useFrame } from '@react-three/fiber';
 import { Moon } from '../moon/Moon'
-
+import {ISS} from '../iss/ISS'
 
 export const Earth= ()=>{
 
@@ -37,6 +37,7 @@ export const Earth= ()=>{
             <meshStandardMaterial map={earthTexture} normalMap={earthNormalMap} roughnessMap={earthSpecMap} />
         </mesh>
         <Moon/>
+        <ISS/>
         </group>
     )
 }

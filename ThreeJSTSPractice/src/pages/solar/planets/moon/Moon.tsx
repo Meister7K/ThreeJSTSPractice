@@ -41,7 +41,7 @@ if(hover){
         <mesh ref={moonRef}
         onPointerOver={()=>setHover(true)}
         onPointerOut={()=>setHover(false)}
-        position={[0,0,4]}
+        
         castShadow receiveShadow>
             <sphereGeometry args={[0.25,36,36]} />
             <meshStandardMaterial map={moonTexture}  />
