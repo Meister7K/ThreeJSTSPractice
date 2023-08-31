@@ -7,7 +7,7 @@ export const ISS =()=>{
 
     const memoizeISS = useMemo(()=>{
         return useGLTF('../../../src/assets/models/ISSObj.glb', true)
-    })
+    },[])
 
     return(<>
     <mesh>
