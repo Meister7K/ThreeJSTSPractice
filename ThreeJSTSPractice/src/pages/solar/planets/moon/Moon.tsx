@@ -26,8 +26,8 @@ if(hover){
         }
 
         //orbit rot
- moonRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* 4;
- moonRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* 4;
+ moonRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* 8;
+ moonRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* 8;
 
         //axis rot
         moonRef.current.rotation.y += 0.003;
