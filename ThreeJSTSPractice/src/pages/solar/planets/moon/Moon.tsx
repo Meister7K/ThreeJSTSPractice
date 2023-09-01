@@ -12,7 +12,7 @@ export const Moon= ()=>{
 const clock = new THREE.Clock();
     const moonRef  = useRef(null);
     const[hover, setHover] = useState(false);
-    
+    const xAxis = 8
 
     const [moonTexture]= useTexture([moonImg]);
 
@@ -26,8 +26,8 @@ if(hover){
         }
 
         //orbit rot
- moonRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* 8;
- moonRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* 8;
+ moonRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* xAxis;
+ moonRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* xAxis;
 
         //axis rot
         moonRef.current.rotation.y += 0.003;

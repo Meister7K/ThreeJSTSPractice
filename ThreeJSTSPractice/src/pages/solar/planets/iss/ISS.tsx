@@ -6,6 +6,7 @@ import * as THREE from "three";
 
 export const ISS =()=>{
 
+    const xAxis = 4
     const issRef = useRef(null);
     const[hover, setHover] = useState(false);
     const clock = new THREE.Clock();
@@ -20,8 +21,8 @@ export const ISS =()=>{
                 }
         
                 //orbit rot
-         issRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* 4;
-         issRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* 4;
+         issRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* xAxis;
+         issRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* xAxis;
         
                 //axis rot
                 issRef.current.rotation.y += 0.004;
