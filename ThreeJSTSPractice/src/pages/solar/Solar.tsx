@@ -7,7 +7,7 @@ import { useRef } from 'react'
 import * as THREE from 'three'
 import { DirectLight } from './lights/DirectLight'
 import {Perf} from 'r3f-perf'
-
+import { Sun } from './starts/sun/Sun'
 
 
 
@@ -28,7 +28,7 @@ const perfRef = useRef();
         <StarsComp/>
        
         <Earth/>
-        
+        <Sun/>
         
     </Canvas>
     </div>)}

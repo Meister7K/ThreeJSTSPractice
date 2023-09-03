@@ -1,0 +1,49 @@
+import {useTexture} from '@react-three/drei'
+import { useRef, useState } from 'react'
+
+import sunImg from '../../../../assets/photos/textures/2k_sun.jpg'
+
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
+
+export const Sun=()=>{
+    const clock = new THREE.Clock();
+    const sunRef  = useRef(null);
+    const[hover, setHover] = useState(false);
+    const xAxis = 8
+
+    const [sunTexture]= useTexture([sunImg]);
+
+    useFrame(()=>{
+//hover
+if(hover){
+            sunRef.current.scale.set(1.1,1.1,1.1);
+            // sunRef.current.
+        }else{
+            sunRef.current.scale.set(1,1,1); 
+        }
+
+        //orbit rot
+//  sunRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* xAxis;
+//  sunRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* xAxis;
+
+        //axis rot
+        sunRef.current.rotation.y += 0.003;
+
+        
+
+    })
+    
+    return(
+        <>
+        <mesh ref={sunRef}
+        onPointerOver={()=>setHover(true)}
+        onPointerOut={()=>setHover(false)}
+        
+        castShadow receiveShadow>
+            <sphereGeometry args={[1,36,36]} />
+            <meshStandardMaterial map={sunTexture}  />
+        </mesh>
+        </>
+    )
+}
