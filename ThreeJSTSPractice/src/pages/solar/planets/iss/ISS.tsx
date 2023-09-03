@@ -38,7 +38,7 @@ export const ISS =()=>{
     return(<>
     <mesh ref={issRef}>
         <primitive onPointerOver={()=>setHover(true)}
-        onPointerOut={()=>setHover(false)} object={memoizeISS.scene} position={[2,0,0]} scale={0.002}/>
+        onPointerOut={()=>setHover(false)} object={memoizeISS.scene} position={[1.5,0,0]} scale={0.002}/>
         </mesh>
     </>)
 }

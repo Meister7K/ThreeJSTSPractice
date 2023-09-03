@@ -6,11 +6,11 @@ import sunImg from '../../../../assets/photos/textures/2k_sun.jpg'
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-export const Sun=()=>{
-    const clock = new THREE.Clock();
+export const Sun=(props:any)=>{
+    
     const sunRef  = useRef(null);
     const[hover, setHover] = useState(false);
-    const xAxis = 8
+    //const xAxis = 8
 
     const [sunTexture]= useTexture([sunImg]);
 
@@ -28,7 +28,7 @@ if(hover){
 //  sunRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* xAxis;
 
         //axis rot
-        sunRef.current.rotation.y += 0.003;
+        sunRef.current.rotation.y -= 0.003;
 
         
 
@@ -36,13 +36,15 @@ if(hover){
     
     return(
         <>
-        <mesh ref={sunRef}
+        <mesh 
+        {...props}
+        ref={sunRef}
         onPointerOver={()=>setHover(true)}
         onPointerOut={()=>setHover(false)}
-        
-        castShadow receiveShadow>
-            <sphereGeometry args={[1,36,36]} />
-            <meshStandardMaterial map={sunTexture}  />
+        >
+            <sphereGeometry args={[2,36,36]} />
+            <meshPhongMaterial map={sunTexture} emissiveMap={sunTexture} emissiveIntensity={1} emissive={0xffffff}/>
+            <pointLight castShadow intensity={1000}/>
         </mesh>
         </>
     )
