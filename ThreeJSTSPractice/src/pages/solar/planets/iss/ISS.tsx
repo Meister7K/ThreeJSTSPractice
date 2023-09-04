@@ -1,31 +1,30 @@
 import { useGLTF } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
-import { useMemo, useRef, useState } from "react"
+import React, { useMemo, useRef, useCallback } from "react"
 import * as THREE from "three";
 //import ISSObj from 'ISSObj.glb'
 
-export const ISS =()=>{
 
-    const xAxis = 4
+export const ISS =React.memo(()=>{
+
+    const clockRef= useRef(new THREE.Clock())
     const issRef = useRef(null);
-    const[hover, setHover] = useState(false);
-    const clock = new THREE.Clock();
-
-    useFrame(()=>{
-        //hover
-        if(hover){
-                    issRef.current.scale.set(1.1,1.1,1.1);
-                    // issRef.current.
-                }else{
-                    issRef.current.scale.set(1,1,1); 
-                }
-        
-                //orbit rot
-         issRef.current.position.x = Math.sin(clock.getElapsedTime()*0.2)* xAxis;
-         issRef.current.position.z = Math.cos(clock.getElapsedTime()*0.2)* xAxis;
+  
+    //const clock = new THREE.Clock();
+const updatePos = useCallback(()=>{
+    const xAxis = 3
+       //orbit rot
+         issRef.current.position.x = Math.sin(clockRef.current.getElapsedTime()*0.2)* xAxis;
+         issRef.current.position.z = Math.cos(clockRef.current.getElapsedTime()*0.2)* xAxis;
         
                 //axis rot
                 issRef.current.rotation.y += 0.004;
+},[])
+    useFrame(()=>{
+        //hover
+       updatePos()
+        
+         
         
                 
         
@@ -37,8 +36,7 @@ export const ISS =()=>{
 
     return(<>
     <mesh ref={issRef}>
-        <primitive onPointerOver={()=>setHover(true)}
-        onPointerOut={()=>setHover(false)} object={memoizeISS.scene} position={[1.5,0,0]} scale={0.002}/>
+        <primitive object={memoizeISS.scene} position={[0,0,0]} scale={0.002}/>
         </mesh>
     </>)
-}
+})

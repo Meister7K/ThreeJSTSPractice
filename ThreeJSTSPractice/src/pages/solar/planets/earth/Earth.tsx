@@ -1,5 +1,5 @@
 import {useTexture} from '@react-three/drei'
-import { useRef, useState } from 'react'
+import { useRef, useCallback } from 'react'
 import earthNormal from '../../../../assets/photos/textures/2k_earth_normal_map.jpg'
 import earthImg from '../../../../assets/photos/textures/2k_earth_daymap.jpg'
 import earthSpec from '../../../../assets/photos/textures/2k_earth_specular_map.jpg'
@@ -8,25 +8,31 @@ import { useFrame } from '@react-three/fiber';
 import { Moon } from '../moon/Moon'
 import {ISS} from '../iss/ISS'
 import * as THREE from 'three'
+import React from 'react'
 
-export const Earth= (props:any)=>{
+export const Earth= React.memo((props:any)=>{
 
     const earthRef  = useRef(null);
     const earthPosRef = useRef(new THREE.Vector3(20,0,0));
-    const clock = new THREE.Clock();
+    //const clock = new THREE.Clock();
+    const clockRef = useRef( new THREE.Clock())
 
     const [earthTexture, earthNormalMap, earthSpecMap, earthEmissiveMap]= useTexture([earthImg, earthNormal, earthSpec, earthNight]);
 
-    useFrame(()=>{
-        
-        
-        const angle = clock.getElapsedTime()*0.5
+    const updatePos = useCallback(()=>{
+        const angle = clockRef.current.getElapsedTime()*0.5
         const distance = 20;
         const x = Math.sin(angle) * distance;
         const z = Math.cos(angle)* distance;
         earthRef.current.position.set(x,0,z);
-        earthRef.current.rotation.y += 0.001;
+        earthRef.current.rotation.y += 0.01;
         earthPosRef.current = earthRef.current.position;
+    },[])
+
+    useFrame(()=>{
+        
+        updatePos()
+        
     })
     
     return(
@@ -44,4 +50,4 @@ export const Earth= (props:any)=>{
         <ISS/>
         </group>
     )
-}
+})
