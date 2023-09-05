@@ -23,11 +23,7 @@ const updatePos = useCallback(()=>{
     useFrame(()=>{
         //hover
        updatePos()
-        
-         
-        
-                
-        
+
             })
 
     const memoizeISS = useMemo(()=>{

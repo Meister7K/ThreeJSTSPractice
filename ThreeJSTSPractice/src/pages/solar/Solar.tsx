@@ -8,7 +8,7 @@ import * as THREE from 'three'
 //import { DirectLight } from './lights/DirectLight'
 import {Perf} from 'r3f-perf'
 import { Sun } from './starts/sun/Sun'
-
+import { CameraPosLog } from '../../helpers/CameraPosLog'
 
 
 export const Solar = ()=>{
@@ -20,8 +20,9 @@ export const Solar = ()=>{
     return(<div className='canvas-div'>
     <Canvas camera={{fov:75, near:0.1, far: 1000, position:[30,5,0]}} shadows>
         <Perf position='bottom-right'/>
+        <CameraPosLog e='mousedown'/>
         {/* scene */}
-            <OrbitControls/>
+            {/* <OrbitControls/> */}
             <color attach='background' args={['black']}/>
         
         {/* components */}

@@ -1,5 +1,5 @@
 import {useTexture} from '@react-three/drei'
-import React, { useRef, useCallback} from 'react'
+import React, { useRef, useCallback, useState, useEffect} from 'react'
 
 import moonImg from '../../../../assets/photos/textures/2k_moon.jpg'
 
@@ -14,7 +14,7 @@ export const Moon= React.memo((props:any)=>{
     const moonRef  = useRef(null);
   const clockRef = useRef(new THREE.Clock());
  
-
+const [hovered, setHovered] = useState(false);
     const [moonTexture]= useTexture([moonImg]);
 
     const updatePos = useCallback(()=>{
@@ -29,6 +29,11 @@ export const Moon= React.memo((props:any)=>{
         moonRef.current.rotation.y += 0.003;
     },[])
 
+    useEffect(()=>{
+
+        document.body.style.cursor = hovered ? 'pointer': 'auto';
+    },[hovered])
+
     useFrame(()=>{
 
 updatePos();        
@@ -39,7 +44,7 @@ updatePos();
         <>
         <mesh ref={moonRef}
         {...props}
-     
+        onPointerOver={()=>setHovered(true)} onPointerOut={()=>setHovered(false)} scale={hovered ? [1.1,1.1,1.1]: [1,1,1]}
         
         castShadow receiveShadow>
             <sphereGeometry args={[0.25,36,36]} />
