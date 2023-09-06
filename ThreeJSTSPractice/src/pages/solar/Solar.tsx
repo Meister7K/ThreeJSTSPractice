@@ -9,13 +9,14 @@ import { Earth } from "./planets/earth/Earth";
 import { Perf } from "r3f-perf";
 import { Sun } from "./starts/sun/Sun";
 import { CameraPosLog } from "../../helpers/CameraPosLog";
-//import { Mercury } from './planets/mercury/Mercury'
+import { Mercury } from './planets/mercury/Mercury'
+import { Saturn } from "./planets/saturn/Saturn";
 
 export const Solar = () => {
   return (
     <div className="canvas-div">
       <Canvas
-        camera={{ fov: 75, near: 0.1, far: 1000, position: [30, 5, 0] }}
+        camera={{ fov: 75, near: 0.1, far: 1000, position: [80, 5, 0] }}
         shadows
       >
         <Perf position="bottom-right" />
@@ -27,8 +28,9 @@ export const Solar = () => {
         {/* components */}
         <StarsComp />
 
+        <Saturn />
         <Earth />
-        {/* <Mercury/> */}
+        <Mercury />
         <Sun />
       </Canvas>
     </div>

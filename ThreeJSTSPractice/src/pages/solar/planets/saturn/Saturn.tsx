@@ -3,11 +3,12 @@ import React, { useRef, useCallback, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import * as TWEEN from "@tweenjs/tween.js";
-import mercImg from "../../../../assets/photos/textures/2k_mercury.jpg";
+import satImg from "../../../../assets/photos/textures/2k_saturn.jpg";
+import satRings from "../../../../assets/photos/textures/satRingMap.jpg";
 
-export const Mercury = React.memo((props: any) => {
-  const mercRef = useRef(null);
-  //const mercPosRef = useRef(new THREE.Vector3(20,0,0));
+export const Saturn = React.memo((props: any) => {
+  const satRef = useRef(null);
+  //const satPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
   const { camera } = useThree();
@@ -19,15 +20,17 @@ export const Mercury = React.memo((props: any) => {
   //const originalCameraPos =  new THREE.Vector3(25,10,20);
   //const originalCamTarget = new THREE.Vector3(0,0,0);
 
-  const [mercTexture] = useTexture([mercImg]);
+  const [satTexture] = useTexture([satImg]);
+  const [rings]= useTexture([satRings]);
+  rings.rotation = Math.PI/2;
 
   const updatePos = useCallback(() => {
-    const angle = clockRef.current.getElapsedTime() * 0.6;
-    const distance = 10;
+    const angle = clockRef.current.getElapsedTime() * 0.3;
+    const distance = 30;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
-    mercRef.current.position.set(x, 0, z);
-    mercRef.current.rotation.y += 0.01;
+    satRef.current.position.set(x, 0, z);
+    satRef.current.rotation.y += 0.01;
   }, []);
 
   const toggleCam = () => {
@@ -41,13 +44,13 @@ export const Mercury = React.memo((props: any) => {
   const tweenAnimate = useCallback(() => {
     TWEEN.update();
 
-    const mercPosRef = mercRef.current.position;
+    const satPosRef = satRef.current.position;
 
     if (camFollowM) {
       // const cameraTargetPos = new THREE.Vector3(
-      //     mercPosRef.x + 10,
-      //     mercPosRef.y + 2,
-      //     mercPosRef.z + 5
+      //     satPosRef.x + 10,
+      //     satPosRef.y + 2,
+      //     satPosRef.z + 5
       // );
 
       new TWEEN.Tween(camPosM)
@@ -59,7 +62,7 @@ export const Mercury = React.memo((props: any) => {
         .start();
 
       new TWEEN.Tween(camTargetM)
-        .to(mercPosRef, 1000)
+        .to(satPosRef, 1000)
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => {
           setCamTargetM(camTargetM);
@@ -99,7 +102,7 @@ export const Mercury = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={mercRef}>
+    <group {...props} ref={satRef} >
       <mesh
         receiveShadow
         castShadow
@@ -108,12 +111,23 @@ export const Mercury = React.memo((props: any) => {
         onPointerOut={() => setHovered(false)}
         scale={hovered ? [1.1, 1.1, 1.1] : [1, 1, 1]}
       >
-        <sphereGeometry args={[0.3, 36, 36]} />
+        <sphereGeometry args={[2.5, 36, 36]} />
         <meshPhongMaterial
-          map={mercTexture}
-        
+          map={satTexture}
+          
           emissiveIntensity={1}
         />
+      </mesh>
+      <mesh
+      receiveShadow
+      castShadow
+      onClick={toggleCam}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+      scale={hovered ? [1.1, 1.1, 1.1] : [1, 1, 1]}
+       rotation-x={Math.PI/2}>
+        <torusGeometry args={[3.5,0.5,2.5,100]} />
+        <meshPhongMaterial map={rings}/>
       </mesh>
     </group>
   );
