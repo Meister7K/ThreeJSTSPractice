@@ -21,7 +21,7 @@ export const Earth= React.memo((props:any)=>{
 
     const [hovered, setHovered] = useState(false);
     const [camFollow, setCamFollow] = useState(false);
-    const [camPos, setCamPos]= useState(new THREE.Vector3(25,10,20))
+    const [camPos, setCamPos]= useState(new THREE.Vector3(25,0,20))
     const [camTarget, setCamTarget] = useState(new THREE.Vector3(0,0,0))
     //const originalCameraPos =  new THREE.Vector3(25,10,20);
     //const originalCamTarget = new THREE.Vector3(0,0,0);
@@ -47,19 +47,18 @@ export const Earth= React.memo((props:any)=>{
         document.body.style.cursor = hovered ? 'pointer': 'auto';
     },[hovered])
 
-    useFrame(()=>{
-        
-        updatePos();
+    const tweenAnimate = useCallback(()=>{
         TWEEN.update();
+
         const earthPosRef = earthRef.current.position;
     
         if (camFollow) {
 
-            const cameraTargetPos = new THREE.Vector3(
-                earthPosRef.x + 10,
-                earthPosRef.y + 2,
-                earthPosRef.z + 5
-            );
+            // const cameraTargetPos = new THREE.Vector3(
+            //     earthPosRef.x + 10,
+            //     earthPosRef.y + 2,
+            //     earthPosRef.z + 5
+            // );
     
             new TWEEN.Tween(camPos)
                 .to(camTarget, 1000)
@@ -102,6 +101,65 @@ export const Earth= React.memo((props:any)=>{
             camera.lookAt(camTarget); // Update to look at camTarget
             camera.position.copy(camPos);
             camera.updateProjectionMatrix(); // Update projection matrix
+    
+    },[camFollow])
+
+    useFrame(()=>{
+        
+        updatePos();
+        tweenAnimate();
+    //     TWEEN.update();
+    //     const earthPosRef = earthRef.current.position;
+    
+    //     if (camFollow) {
+
+    //         // const cameraTargetPos = new THREE.Vector3(
+    //         //     earthPosRef.x + 10,
+    //         //     earthPosRef.y + 2,
+    //         //     earthPosRef.z + 5
+    //         // );
+    
+    //         new TWEEN.Tween(camPos)
+    //             .to(camTarget, 1000)
+    //             .easing(TWEEN.Easing.Quadratic.Out)
+    //             .onUpdate(() => {
+    //                 setCamPos(camPos);
+    //             })
+    //             .start();
+    
+    //         new TWEEN.Tween(camTarget)
+    //             .to(earthPosRef, 1000)
+    //             .easing(TWEEN.Easing.Quadratic.Out)
+    //             .onUpdate(() => {
+    //                 setCamTarget(camTarget);
+    //             })
+    //             .start();
+    
+    //         // camera.lookAt(camTarget); // Update to look at camTarget
+    //         // camera.position.copy(cameraTargetPos);
+    //     } else {
+    //         const originalCameraPos = new THREE.Vector3(25, 10, 20);
+    //         const originalCamTarget = new THREE.Vector3(0, 0, 0);
+    
+    //         new TWEEN.Tween(camPos)
+    //             .to(originalCameraPos, 1000)
+    //             .easing(TWEEN.Easing.Quadratic.Out)
+    //             .onUpdate(() => {
+    //                 setCamPos(camPos);
+    //             })
+    //             .start();
+    
+    //         new TWEEN.Tween(camTarget)
+    //             .to(originalCamTarget, 1000)
+    //             .easing(TWEEN.Easing.Quadratic.Out)
+    //             .onUpdate(() => {
+    //                 setCamTarget(camTarget);
+    //             })
+    //             .start();
+    //  }
+    //         camera.lookAt(camTarget); // Update to look at camTarget
+    //         camera.position.copy(camPos);
+    //         camera.updateProjectionMatrix(); // Update projection matrix
        
     });
     
