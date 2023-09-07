@@ -11,6 +11,7 @@ import { Sun } from "./starts/sun/Sun";
 import { CameraPosLog } from "../../helpers/CameraPosLog";
 import { Mercury } from './planets/mercury/Mercury'
 import { Saturn } from "./planets/saturn/Saturn";
+import { Venus } from "./planets/venus/Venus";
 
 export const Solar = () => {
   return (
@@ -30,6 +31,7 @@ export const Solar = () => {
 
         <Saturn />
         <Earth />
+        <Venus/>
         <Mercury />
         <Sun />
       </Canvas>
