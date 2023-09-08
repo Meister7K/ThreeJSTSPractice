@@ -8,7 +8,7 @@ import { OrbitControls } from '@react-three/drei';
 // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 //const cube = new THREE.Mesh(geometry, material);
 
-export const Game = () =>{
+const Game = () =>{
 
 
     return(
@@ -23,3 +23,5 @@ export const Game = () =>{
        
     )
 }
+
+export default Game

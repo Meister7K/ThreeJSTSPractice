@@ -3,11 +3,11 @@ import React, { useRef, useCallback, useEffect, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import * as TWEEN from "@tweenjs/tween.js";
-import venusimg from "../../../../assets/photos/textures/2k_venus_surface.jpg";
+import dioImg from "../../../../assets/photos/textures/DioMeme.png";
 
-export const Venus = React.memo((props: any) => {
-  const venusRef = useRef(null);
-  //const venusPosRef = useRef(new THREE.Vector3(20,0,0));
+export const Dio = React.memo((props: any) => {
+  const dioRef = useRef(null);
+  //const dioPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
   const { camera } = useThree();
@@ -19,15 +19,15 @@ export const Venus = React.memo((props: any) => {
   //const originalCameraPos =  new THREE.Vector3(25,10,20);
   //const originalCamTarget = new THREE.Vector3(0,0,0);
 
-  const [venusTexture] = useTexture([venusimg]);
+  const [dioTexture] = useTexture([dioImg]);
 
   const updatePos = useCallback(() => {
-    const angle = clockRef.current.getElapsedTime() * 0.55;
-    const distance = 20;
+    const angle = clockRef.current.getElapsedTime() * 0.20;
+    const distance = 90;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
-    venusRef.current.position.set(x, 0, z);
-    venusRef.current.rotation.y += 0.01;
+    dioRef.current.position.set(x, 0, z);
+    dioRef.current.rotation.y += 0.01;
   }, []);
 
   const toggleCam = () => {
@@ -41,13 +41,13 @@ export const Venus = React.memo((props: any) => {
   const tweenAnimate = useCallback(() => {
     TWEEN.update();
 
-    const venusPosRef = venusRef.current.position;
+    const dioPosRef = dioRef.current.position;
 
     if (camFollowM) {
       // const cameraTargetPos = new THREE.Vector3(
-      //     venusPosRef.x + 10,
-      //     venusPosRef.y + 2,
-      //     venusPosRef.z + 5
+      //     dioPosRef.x + 10,
+      //     dioPosRef.y + 2,
+      //     dioPosRef.z + 5
       // );
 
       new TWEEN.Tween(camPosM)
@@ -59,7 +59,7 @@ export const Venus = React.memo((props: any) => {
         .start();
 
       new TWEEN.Tween(camTargetM)
-        .to(venusPosRef, 1000)
+        .to(dioPosRef, 1000)
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => {
           setCamTargetM(camTargetM);
@@ -99,7 +99,7 @@ export const Venus = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={venusRef}>
+    <group {...props} ref={dioRef}>
       <mesh
         receiveShadow
         castShadow
@@ -110,9 +110,9 @@ export const Venus = React.memo((props: any) => {
       >
         <sphereGeometry args={[1, 36, 36]} />
         <meshPhongMaterial
-          map={venusTexture}
-        
-          emissiveIntensity={1}
+          map={dioTexture}
+            emissive={0xffffff}
+          emissiveIntensity={.1}
         />
       </mesh>
     </group>

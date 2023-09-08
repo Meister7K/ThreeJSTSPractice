@@ -69,7 +69,7 @@ export const Mercury = React.memo((props: any) => {
       // camera.lookAt(camTargetM); // Update to look at camTargetM
       // camera.position.copy(cameraTargetPos);
     } else {
-      const originalCameraPos = new THREE.Vector3(25, 10, 20);
+      const originalCameraPos = new THREE.Vector3(110, 20, 20);
       const originalCamTarget = new THREE.Vector3(0, 0, 0);
 
       new TWEEN.Tween(camPosM)
@@ -108,7 +108,7 @@ export const Mercury = React.memo((props: any) => {
         onPointerOut={() => setHovered(false)}
         scale={hovered ? [1.1, 1.1, 1.1] : [1, 1, 1]}
       >
-        <sphereGeometry args={[0.3, 36, 36]} />
+        <sphereGeometry args={[0.4, 36, 36]} />
         <meshPhongMaterial
           map={mercTexture}
         

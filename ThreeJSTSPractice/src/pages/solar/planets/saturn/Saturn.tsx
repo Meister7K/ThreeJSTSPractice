@@ -25,8 +25,8 @@ export const Saturn = React.memo((props: any) => {
   rings.rotation = Math.PI/2;
 
   const updatePos = useCallback(() => {
-    const angle = clockRef.current.getElapsedTime() * 0.3;
-    const distance = 30;
+    const angle = clockRef.current.getElapsedTime() * 0.35;
+    const distance = 60;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
     satRef.current.position.set(x, 0, z);
@@ -72,7 +72,7 @@ export const Saturn = React.memo((props: any) => {
       // camera.lookAt(camTargetM); // Update to look at camTargetM
       // camera.position.copy(cameraTargetPos);
     } else {
-      const originalCameraPos = new THREE.Vector3(25, 10, 20);
+      const originalCameraPos = new THREE.Vector3(110, 20, 20);
       const originalCamTarget = new THREE.Vector3(0, 0, 0);
 
       new TWEEN.Tween(camPosM)

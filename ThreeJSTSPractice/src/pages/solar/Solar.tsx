@@ -5,31 +5,40 @@ import { StarsComp } from "./starts/StarsComp";
 import { Earth } from "./planets/earth/Earth";
 //import { useRef } from 'react'
 //import * as THREE from 'three'
-//import { DirectLight } from './lights/DirectLight'
+import { DirectLight } from './lights/DirectLight'
 import { Perf } from "r3f-perf";
 import { Sun } from "./starts/sun/Sun";
-import { CameraPosLog } from "../../helpers/CameraPosLog";
+//import { CameraPosLog } from "../../helpers/CameraPosLog";
 import { Mercury } from './planets/mercury/Mercury'
 import { Saturn } from "./planets/saturn/Saturn";
 import { Venus } from "./planets/venus/Venus";
+import { Mars } from "./planets/mars/Mars";
+import { Jupiter } from "./planets/jupiter/Jupiter";
+import { Uranus } from "./planets/uranus/Uranus";
+import { Neptune } from "./planets/neptune/Neptune";
+import { Dio } from "./planets/dio/Dio";
 
-export const Solar = () => {
+const Solar = () => {
   return (
     <div className="canvas-div">
       <Canvas
-        camera={{ fov: 75, near: 0.1, far: 1000, position: [80, 5, 0] }}
+        camera={{ fov: 75, near: 0.1, far: 1000, position: [100, 5, 0] }}
         shadows
       >
         <Perf position="bottom-right" />
-        <CameraPosLog e="mousedown" />
+        {/* <CameraPosLog e="mousedown" /> */}
         {/* scene */}
-        {/* <OrbitControls/> */}
+        <DirectLight/>
         <color attach="background" args={["black"]} />
 
         {/* components */}
         <StarsComp />
-
+        <Dio/>
+        <Neptune/>
+        <Uranus/>
         <Saturn />
+        <Jupiter/>
+        <Mars/>
         <Earth />
         <Venus/>
         <Mercury />
@@ -38,3 +47,4 @@ export const Solar = () => {
     </div>
   );
 };
+export default Solar;

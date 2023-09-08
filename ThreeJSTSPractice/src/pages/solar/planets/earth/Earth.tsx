@@ -30,7 +30,7 @@ export const Earth = React.memo((props: any) => {
 
   const updatePos = useCallback(() => {
     const angle = clockRef.current.getElapsedTime() * 0.5;
-    const distance = 20;
+    const distance = 30;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
     earthRef.current.position.set(x, 0, z);
@@ -76,7 +76,7 @@ export const Earth = React.memo((props: any) => {
       // camera.lookAt(camTarget); // Update to look at camTarget
       // camera.position.copy(cameraTargetPos);
     } else {
-      const originalCameraPos = new THREE.Vector3(25, 10, 20);
+      const originalCameraPos = new THREE.Vector3(110, 20, 20);
       const originalCamTarget = new THREE.Vector3(0, 0, 0);
 
       new TWEEN.Tween(camPos)

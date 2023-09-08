@@ -12,7 +12,7 @@ export const ISS =React.memo(()=>{
   
     //const clock = new THREE.Clock();
 const updatePos = useCallback(()=>{
-    const xAxis = 3
+    const xAxis = 2;
        //orbit rot
          issRef.current.position.x = Math.sin(clockRef.current.getElapsedTime()*0.2)* xAxis;
          issRef.current.position.z = Math.cos(clockRef.current.getElapsedTime()*0.2)* xAxis;
