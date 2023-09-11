@@ -1,4 +1,4 @@
-import React, { Suspense,lazy } from 'react';
+import { Suspense,lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.scss'
 // import { Perf } from 'r3f-perf'
