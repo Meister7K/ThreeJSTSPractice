@@ -44,7 +44,7 @@ if(hover){
         >
             <sphereGeometry args={[2,36,36]} />
             <meshPhongMaterial map={sunTexture} emissiveMap={sunTexture} emissiveIntensity={1} emissive={0xffffff}/>
-            <pointLight castShadow intensity={4000}/>
+            <pointLight castShadow intensity={1000}/>
         </mesh>
         </>
     )

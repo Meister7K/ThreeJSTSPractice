@@ -13,6 +13,8 @@ import React from "react";
 
 export const Earth = React.memo((props: any) => {
   const earthRef = useRef(null);
+
+  
   //const earthPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
@@ -20,20 +22,23 @@ export const Earth = React.memo((props: any) => {
 
   const [hovered, setHovered] = useState(false);
   const [camFollow, setCamFollow] = useState(false);
-  const [camPos, setCamPos] = useState(new THREE.Vector3(25, 0, 20));
-  const [camTarget, setCamTarget] = useState(new THREE.Vector3(0, 0, 0));
+  const [camPos, setCamPos] = useState(new THREE.Vector3(60, 40, 0));
+  const [camTarget, setCamTarget] = useState(new THREE.Vector3(0,0,0));
   //const originalCameraPos =  new THREE.Vector3(25,10,20);
   //const originalCamTarget = new THREE.Vector3(0,0,0);
 
   const [earthTexture, earthNormalMap, earthSpecMap, earthEmissiveMap] =
     useTexture([earthImg, earthNormal, earthSpec, earthNight]);
 
+
+
   const updatePos = useCallback(() => {
     const angle = clockRef.current.getElapsedTime() * 0.5;
-    const distance = 30;
+    const distance = 9;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
     earthRef.current.position.set(x, 0, z);
+    
     earthRef.current.rotation.y += 0.01;
   }, []);
 
@@ -51,17 +56,23 @@ export const Earth = React.memo((props: any) => {
     const earthPosRef = earthRef.current.position;
 
     if (camFollow) {
-      // const cameraTargetPos = new THREE.Vector3(
-      //     earthPosRef.x + 10,
-      //     earthPosRef.y + 2,
-      //     earthPosRef.z + 5
-      // );
+      const angle = clockRef.current.getElapsedTime() * 0.4;
+    const distance = 7;
+    const camTargetPos = new THREE.Vector3(
+      earthPosRef.x + Math.sin(angle) * distance,
+      earthPosRef.y +5,
+      earthPosRef.z +Math.cos(angle) * distance
+    );
+
+      // console.log(camTargetPos)
+      // console.log(earthPosRef)
 
       new TWEEN.Tween(camPos)
-        .to(camTarget, 1000)
+        .to(camTargetPos, 1000)
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => {
           setCamPos(camPos);
+          camera.position.copy(camPos);
         })
         .start();
 
@@ -70,13 +81,14 @@ export const Earth = React.memo((props: any) => {
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => {
           setCamTarget(camTarget);
+          camera.lookAt(camTarget);
         })
         .start();
 
       // camera.lookAt(camTarget); // Update to look at camTarget
       // camera.position.copy(cameraTargetPos);
     } else {
-      const originalCameraPos = new THREE.Vector3(110, 20, 20);
+      const originalCameraPos = new THREE.Vector3(60, 40, 0);
       const originalCamTarget = new THREE.Vector3(0, 0, 0);
 
       new TWEEN.Tween(camPos)
@@ -84,6 +96,7 @@ export const Earth = React.memo((props: any) => {
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => {
           setCamPos(camPos);
+          camera.position.copy(camPos);
         })
         .start();
 
@@ -92,11 +105,12 @@ export const Earth = React.memo((props: any) => {
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => {
           setCamTarget(camTarget);
+          camera.lookAt(camTarget);
         })
         .start();
     }
-    camera.lookAt(camTarget); // Update to look at camTarget
-    camera.position.copy(camPos);
+    // camera.lookAt(camTarget); // Update to look at camTarget
+    // camera.position.copy(camPos);
     camera.updateProjectionMatrix(); // Update projection matrix
   }, [camFollow]);
 

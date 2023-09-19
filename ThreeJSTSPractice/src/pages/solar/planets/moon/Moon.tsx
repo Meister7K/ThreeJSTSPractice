@@ -15,7 +15,7 @@ export const Moon = React.memo((props: any) => {
 
   const updatePos = useCallback(() => {
     //const clock = new THREE.Clock();
-    const xAxis = 3;
+    const xAxis = 2;
     //orbit rot
     moonRef.current.position.x =
       Math.sin(clockRef.current.getElapsedTime() * 1.1) * xAxis;

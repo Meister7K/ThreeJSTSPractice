@@ -1,4 +1,4 @@
-//import { OrbitControls, useHelper } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import "./Solar.scss";
 import { Canvas } from "@react-three/fiber";
 import { StarsComp } from "./starts/StarsComp";
@@ -22,12 +22,13 @@ const Solar = () => {
   return (
     <div className="canvas-div">
       <Canvas
-        camera={{ fov: 75, near: 0.1, far: 1000, position: [100, 5, 0] }}
+        camera={{ fov: 75, near: 0.1, far: 1000}}
         shadows
       >
         <Perf position="bottom-right" />
         {/* <CameraPosLog e="mousedown" /> */}
         {/* scene */}
+        <OrbitControls/>
         <DirectLight/>
         <color attach="background" args={["black"]} />
 
@@ -39,7 +40,7 @@ const Solar = () => {
         <Saturn />
         <Jupiter/>
         <Mars/>
-        <Earth />
+        <Earth displacementScale={0.15}/>
         <Venus/>
         <Mercury />
         <Sun />
