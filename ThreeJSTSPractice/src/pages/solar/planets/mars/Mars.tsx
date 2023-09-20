@@ -1,12 +1,12 @@
 import { useTexture } from "@react-three/drei";
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, /*useThree*/ } from "@react-three/fiber";
 import * as THREE from "three";
 // import * as TWEEN from "@tweenjs/tween.js";
 import marsImg from "../../../../assets/photos/textures/2k_mars.jpg";
 
-export const Mars = React.memo((props: any) => {
-  const marsRef = useRef(null);
+export const Mars = React.memo(() => {
+  const marsRef = useRef<THREE.Group>(null);
   //const marsPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
@@ -26,8 +26,11 @@ export const Mars = React.memo((props: any) => {
     const distance = 12;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
-    marsRef.current.position.set(x, 0, z);
+    if(marsRef.current){
+       marsRef.current.position.set(x, 0, z);
     marsRef.current.rotation.y += 0.01;
+    }
+   
   }, []);
 
   // const toggleCam = () => {
@@ -99,7 +102,9 @@ export const Mars = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={marsRef}>
+    <group 
+    // {...props} 
+    ref={marsRef}>
       <mesh
         receiveShadow
         castShadow

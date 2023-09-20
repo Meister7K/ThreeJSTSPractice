@@ -11,8 +11,8 @@ import * as THREE from "three";
 import * as TWEEN from "@tweenjs/tween.js";
 import React from "react";
 
-export const Earth = React.memo((props: any) => {
-  const earthRef = useRef(null);
+export const Earth = React.memo(() => {
+  const earthRef = useRef<THREE.Group>(null);
 
   
   //const earthPosRef = useRef(new THREE.Vector3(20,0,0));
@@ -33,13 +33,17 @@ export const Earth = React.memo((props: any) => {
 
 
   const updatePos = useCallback(() => {
-    const angle = clockRef.current.getElapsedTime() * 0.5;
+
+    if(earthRef.current){
+      const angle = clockRef.current.getElapsedTime() * 0.5;
     const distance = 9;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
     earthRef.current.position.set(x, 0, z);
     
     earthRef.current.rotation.y += 0.01;
+    }
+    
   }, []);
 
   const toggleCam = () => {
@@ -52,8 +56,11 @@ export const Earth = React.memo((props: any) => {
 
   const tweenAnimate = useCallback(() => {
     TWEEN.update();
+
+    if(earthRef.current){
+      const earthPosRef = earthRef.current.position;
+  
     
-    const earthPosRef = earthRef.current.position;
 
     if (camFollow) {
       const angle = clockRef.current.getElapsedTime() * 0.4;
@@ -108,11 +115,11 @@ export const Earth = React.memo((props: any) => {
           camera.lookAt(camTarget);
         })
         .start();
-    }
+    }  }
     // camera.lookAt(camTarget); // Update to look at camTarget
     // camera.position.copy(camPos);
     camera.updateProjectionMatrix(); // Update projection matrix
-  }, [camFollow]);
+  }, [camFollow, camPos, camTarget, camera]);
 
   useFrame(() => {
     updatePos();
@@ -120,7 +127,9 @@ export const Earth = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={earthRef}>
+    <group 
+    //  {...props}
+     ref={earthRef}>
       <mesh
         receiveShadow
         castShadow

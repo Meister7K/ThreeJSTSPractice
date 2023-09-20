@@ -5,8 +5,8 @@ import * as THREE from "three";
 // import * as TWEEN from "@tweenjs/tween.js";
 import dioImg from "../../../../assets/photos/textures/DioMeme.png";
 
-export const Dio = React.memo((props: any) => {
-  const dioRef = useRef(null);
+export const Dio = React.memo(() => {
+  const dioRef = useRef<THREE.Group>(null);
   //const dioPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
@@ -102,7 +102,9 @@ export const Dio = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={dioRef}>
+    <group 
+    // {...props} 
+    ref={dioRef}>
       <mesh
         receiveShadow
         castShadow

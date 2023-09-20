@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { useEffect } from 'react';
 import './Home.scss'
 
@@ -5,33 +6,34 @@ export const Home = () => {
 
 useEffect(()=>{
 
-    var svgEl = document.getElementById('animated-lines');
+    const svgEl = document.getElementById('animated-lines');
 
-    var randomRange = function(min: number, max: number) {
+    const randomRange = function(min: number, max: number) {
       return(Math.random() * (max - min + 1)) + min
     };
     
-    var numberOfLines = 500,
+    const numberOfLines = 500,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       lineDataArr: any[] = [];
     
-    var createPathString = function() {
+    const createPathString = function() {
     
-      var completedPath = '',
+      let completedPath = '',
         comma = ',',
         ampl = 10; 
     
-      for (var i = 0; i < numberOfLines; i++) {
+      for (let i = 0; i < numberOfLines; i++) {
     
-        var path = lineDataArr[i];
+        const path = lineDataArr[i];
     
-        var current = {
+        const current = {
           x: ampl * Math.sin(path.counter / path.sin),
           y: ampl * Math.cos(path.counter / path.cos)
         };
 
         const fix = 4
     
-        var newPathSection = 'M' +
+        const newPathSection = 'M' +
           path.startX +
           comma +
           path.startY +
@@ -51,23 +53,23 @@ useEffect(()=>{
     
         completedPath += newPathSection;
     
-      };
+      }
     
       return completedPath;
     
     };
     
-    var createLines = function() {
+    const createLines = function() {
     
-      var newPathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path'),
+      const newPathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path'),
  
         minSpeed = 100,
         maxSpeed = 10;
     
    
-      for (var i = 0; i < numberOfLines; i++) {
+      for (let i = 0; i < numberOfLines; i++) {
     
-        var lineDataObj = {
+        const lineDataObj = {
           counter: randomRange(1, 500), 
           startX: randomRange(0,10),
           startY: randomRange(0,10),
@@ -84,7 +86,7 @@ useEffect(()=>{
     
       }
     
-      var animLoop = function() {
+      const animLoop = function() {
         newPathEl.setAttribute('d', createPathString());
         requestAnimationFrame(animLoop);
       }

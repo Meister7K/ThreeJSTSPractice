@@ -1,12 +1,12 @@
 import { useTexture } from "@react-three/drei";
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, /*useThree*/ } from "@react-three/fiber";
 import * as THREE from "three";
 // import * as TWEEN from "@tweenjs/tween.js";
 import nepImg from "../../../../assets/photos/textures/2k_neptune.jpg";
 
-export const Neptune = React.memo((props: any) => {
-  const nepRef = useRef(null);
+export const Neptune = React.memo(() => {
+  const nepRef = useRef<THREE.Group>(null);
   //const nepPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
@@ -26,8 +26,11 @@ export const Neptune = React.memo((props: any) => {
     const distance = 40;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
-    nepRef.current.position.set(x, 0, z);
+    if(nepRef.current){
+       nepRef.current.position.set(x, 0, z);
     nepRef.current.rotation.y += 0.01;
+    }
+   
   }, []);
 
   // const toggleCam = () => {
@@ -99,7 +102,9 @@ export const Neptune = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={nepRef}>
+    <group 
+    // {...props} 
+    ref={nepRef}>
       <mesh
         receiveShadow
         castShadow

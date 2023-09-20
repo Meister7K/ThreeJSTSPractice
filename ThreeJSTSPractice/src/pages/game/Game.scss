@@ -5,3 +5,15 @@
     width: 100dvw;
     height: 100dvh;
 }
+
+.UD{
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    color:red;
+    transform: rotateZ(10deg);
+    opacity: .4;
+    pointer-events: none;
+    user-select: none;
+}

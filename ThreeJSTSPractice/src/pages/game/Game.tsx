@@ -1,7 +1,7 @@
 import './Game.scss'
-import * as THREE from 'three';
+// import * as THREE from 'three';
 import { Canvas } from '@react-three/fiber';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { OrbitControls } from '@react-three/drei';
 
 // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -13,6 +13,7 @@ const Game = () =>{
 
     return(
         <div className='game-container'>
+            <h1 className='UD'>Under Development</h1>
         <Canvas >
         <OrbitControls/>
            <mesh>

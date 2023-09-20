@@ -1,13 +1,13 @@
 import { useTexture } from "@react-three/drei";
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, /*useThree*/ } from "@react-three/fiber";
 import * as THREE from "three";
 // import * as TWEEN from "@tweenjs/tween.js";
 import satImg from "../../../../assets/photos/textures/2k_saturn.jpg";
 import satRings from "../../../../assets/photos/textures/satRingMap.jpg";
 
-export const Saturn = React.memo((props: any) => {
-  const satRef = useRef(null);
+export const Saturn = React.memo(() => {
+  const satRef = useRef<THREE.Group>(null);
   //const satPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
@@ -29,8 +29,11 @@ export const Saturn = React.memo((props: any) => {
     const distance = 30;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
-    satRef.current.position.set(x, 0, z);
+    if(satRef.current){
+      satRef.current.position.set(x, 0, z);
     satRef.current.rotation.y += 0.01;
+    }
+    
   }, []);
 
   // const toggleCam = () => {
@@ -102,7 +105,9 @@ export const Saturn = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={satRef} >
+    <group 
+    // {...props} 
+    ref={satRef} >
       <mesh
         receiveShadow
         castShadow

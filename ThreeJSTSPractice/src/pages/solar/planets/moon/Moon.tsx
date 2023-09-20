@@ -6,8 +6,8 @@ import moonImg from "../../../../assets/photos/textures/2k_moon.jpg";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-export const Moon = React.memo((props: any) => {
-  const moonRef = useRef(null);
+export const Moon = React.memo(() => {
+  const moonRef = useRef<THREE.Mesh>(null);
   const clockRef = useRef(new THREE.Clock());
 
   const [hovered, setHovered] = useState(false);
@@ -17,13 +17,16 @@ export const Moon = React.memo((props: any) => {
     //const clock = new THREE.Clock();
     const xAxis = 2;
     //orbit rot
-    moonRef.current.position.x =
+    if(moonRef.current){
+       moonRef.current.position.x =
       Math.sin(clockRef.current.getElapsedTime() * 1.1) * xAxis;
     moonRef.current.position.z =
       Math.cos(clockRef.current.getElapsedTime() * 1.1) * xAxis;
 
     //axis rot
     moonRef.current.rotation.y += 0.003;
+    }
+   
   }, []);
 
   useEffect(() => {
@@ -38,7 +41,7 @@ export const Moon = React.memo((props: any) => {
     <>
       <mesh
         ref={moonRef}
-        {...props}
+        // {...props}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
         scale={hovered ? [1.1, 1.1, 1.1] : [1, 1, 1]}

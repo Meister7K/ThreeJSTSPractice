@@ -1,12 +1,12 @@
 import { useTexture } from "@react-three/drei";
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, /*useThree*/ } from "@react-three/fiber";
 import * as THREE from "three";
 // import * as TWEEN from "@tweenjs/tween.js";
 import venusimg from "../../../../assets/photos/textures/2k_venus_surface.jpg";
 
-export const Venus = React.memo((props: any) => {
-  const venusRef = useRef(null);
+export const Venus = React.memo(() => {
+  const venusRef = useRef<THREE.Group>(null);
   //const venusPosRef = useRef(new THREE.Vector3(20,0,0));
   //const clock = new THREE.Clock();
   const clockRef = useRef(new THREE.Clock());
@@ -26,8 +26,11 @@ export const Venus = React.memo((props: any) => {
     const distance = 6;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
-    venusRef.current.position.set(x, 0, z);
+    if(venusRef.current){
+      venusRef.current.position.set(x, 0, z);
     venusRef.current.rotation.y += 0.01;
+    }
+    
   }, []);
 
   // const toggleCam = () => {
@@ -99,7 +102,9 @@ export const Venus = React.memo((props: any) => {
   });
 
   return (
-    <group {...props} ref={venusRef}>
+    <group 
+    // {...props} 
+    ref={venusRef}>
       <mesh
         receiveShadow
         castShadow
