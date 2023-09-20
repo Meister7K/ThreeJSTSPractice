@@ -1,0 +1,1 @@
+import{j as s}from"./index-cfc653f9.js";import{C as e,O as r}from"./OrbitControls-f81d6e72.js";const o=()=>s.jsxs("div",{className:"game-container",children:[s.jsx("h1",{className:"UD",children:"Under Development"}),s.jsxs(e,{children:[s.jsx(r,{}),s.jsx("mesh",{children:s.jsx("boxGeometry",{args:[1,1,1]})})]})]});export{o as default};
