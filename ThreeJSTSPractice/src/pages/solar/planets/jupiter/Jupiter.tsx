@@ -30,8 +30,8 @@ export const Jupiter = React.memo((props: any) => {
     jupRef.current.rotation.y += 0.01;
   }, []);
 
-  // const toggleCam = () => {
-  //   setCamFollowM((prevCam) => !prevCam);
+  // // const toggleCam = () => {
+  // //   setCamFollowM((prevCam) => !prevCam);
   // };
 
   useEffect(() => {

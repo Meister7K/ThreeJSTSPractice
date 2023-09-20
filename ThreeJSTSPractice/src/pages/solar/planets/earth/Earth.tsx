@@ -52,7 +52,7 @@ export const Earth = React.memo((props: any) => {
 
   const tweenAnimate = useCallback(() => {
     TWEEN.update();
-
+    
     const earthPosRef = earthRef.current.position;
 
     if (camFollow) {

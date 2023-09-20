@@ -20,7 +20,7 @@ import { Dio } from "./planets/dio/Dio";
 
 const Solar = () => {
   return (
-    <div className="canvas-div">
+    <div className="canvas-div" title="click on Earth to toggle display from Earth">
       <Canvas
         camera={{ fov: 75, near: 0.1, far: 1000}}
         shadows
@@ -40,7 +40,7 @@ const Solar = () => {
         <Saturn />
         <Jupiter/>
         <Mars/>
-        <Earth displacementScale={0.15}/>
+        <Earth />
         <Venus/>
         <Mercury />
         <Sun />

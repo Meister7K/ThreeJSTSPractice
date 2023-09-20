@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'Kosmo';
+  src: local('Kosmo'),
+  url('./assets/fonts/Kosmo.ttf') format('woff');
+}
+
 :root {
   box-sizing: border-box;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, 'Kosmo' , Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  letter-spacing: 0.2em;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;

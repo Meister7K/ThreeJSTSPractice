@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei";
 import React, { useRef, useCallback, useEffect, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, /*useThree*/ } from "@react-three/fiber";
 import * as THREE from "three";
 // import * as TWEEN from "@tweenjs/tween.js";
 import dioImg from "../../../../assets/photos/textures/DioMeme.png";
@@ -26,8 +26,11 @@ export const Dio = React.memo((props: any) => {
     const distance = 45;
     const x = Math.sin(angle) * distance;
     const z = Math.cos(angle) * distance;
-    dioRef.current.position.set(x, 0, z);
-    dioRef.current.rotation.y += 0.01;
+    if(dioRef.current){
+       dioRef.current.position.set(x, 0, z);
+      dioRef.current.rotation.y += 0.01;
+    }
+   
   }, []);
 
   // const toggleCam = () => {
