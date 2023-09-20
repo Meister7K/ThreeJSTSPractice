@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import './Home.scss'
 
-export const Home = () => {
+const Home = () => {
 
 useEffect(()=>{
 
@@ -132,3 +132,5 @@ useEffect(()=>{
 
     </>)
 }
+
+export default Home
