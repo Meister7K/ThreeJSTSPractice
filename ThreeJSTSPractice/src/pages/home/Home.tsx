@@ -25,6 +25,8 @@ useEffect(()=>{
       for (let i = 0; i < numberOfLines; i++) {
     
         const path = lineDataArr[i];
+
+        
     
         const current = {
           x: ampl * Math.sin(path.counter / path.sin),
@@ -58,6 +60,13 @@ useEffect(()=>{
       return completedPath;
     
     };
+
+    const randColor =()=>{
+    const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgba(${r},${g},${b}, 0.5)`;
+   }
     
     const createLines = function() {
     
@@ -65,8 +74,9 @@ useEffect(()=>{
  
         minSpeed = 100,
         maxSpeed = 10;
-    
+        newPathEl.setAttribute('stroke', randColor()); 
    
+
       for (let i = 0; i < numberOfLines; i++) {
     
         const lineDataObj = {
@@ -79,11 +89,12 @@ useEffect(()=>{
           cos: randomRange(minSpeed, maxSpeed),
           pointX: randomRange(0, 5),
           centerX: randomRange(0, window.innerWidth),
-          centerY: randomRange(0, window.innerHeight)
+          centerY: randomRange(0, window.innerHeight),
+        //   stroke: randColor(),
         }
     
         lineDataArr.push(lineDataObj)
-    
+    console.log(lineDataArr)
       }
     
       const animLoop = function() {
@@ -104,7 +115,7 @@ useEffect(()=>{
 
     return (<>
         <div className='background'>
-        <svg id="animated-lines" version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>
+        <svg id="animated-lines" version="1.1" xmlns="http://www.w3.org/2000/svg" ></svg>
          </div>    
             <h1>
                 Home

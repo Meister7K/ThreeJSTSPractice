@@ -8,9 +8,12 @@
 
 .UD{
     z-index: 10;
-    position: absolute;
+    position: fixed;
     top: 50%;
-    left: 10%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 50%;
     color:red;
     transform: rotateZ(10deg);
     opacity: .4;
