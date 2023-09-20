@@ -12,7 +12,7 @@ export const ISS = React.memo(() => {
     const clockRef = useRef(new THREE.Clock())
     const issRef = useRef<THREE.Mesh>(null);
     const memoizeISS = useMemo(() => {
-        return useGLTF('../../../src/assets/models/ISSObj.glb', true)
+        return useGLTF('/assets/ISSObj.glb', true)
     },[])
     //const clock = new THREE.Clock();
     const updatePos = useCallback(() => {

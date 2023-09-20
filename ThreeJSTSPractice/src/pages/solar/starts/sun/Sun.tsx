@@ -4,11 +4,11 @@ import { useRef, useState } from 'react'
 import sunImg from '../../../../assets/photos/textures/2k_sun.jpg'
 
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+// import * as THREE from 'three';
 
-export const Sun=(props:any)=>{
+export const Sun=()=>{
     
-    const sunRef  = useRef(null);
+    const sunRef  = useRef<THREE.Mesh>(null);
     const[hover, setHover] = useState(false);
     //const xAxis = 8
 
@@ -16,7 +16,8 @@ export const Sun=(props:any)=>{
 
     useFrame(()=>{
 //hover
-if(hover){
+if(sunRef.current){
+    if(hover){
             sunRef.current.scale.set(1.1,1.1,1.1);
             // sunRef.current.
         }else{
@@ -32,12 +33,14 @@ if(hover){
 
         
 
-    })
+    }
+})
+
     
     return(
         <>
         <mesh 
-        {...props}
+        // {...props}
         ref={sunRef}
         onPointerOver={()=>setHover(true)}
         onPointerOut={()=>setHover(false)}

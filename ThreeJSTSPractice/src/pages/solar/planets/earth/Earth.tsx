@@ -8,6 +8,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Moon } from "../moon/Moon";
 import { ISS } from "../iss/ISS";
 import * as THREE from "three";
+// @ts-ignore
 import * as TWEEN from "@tweenjs/tween.js";
 import React from "react";
 
